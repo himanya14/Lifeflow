@@ -1,0 +1,69 @@
+--- a/LifeFlow_Donor_Synced/frontend/src/styles.css
++++ b/LifeFlow_Donor_Synced/frontend/src/styles.css
+@@ -605,3 +605,62 @@
+ .topbar{gap:14px}.topbar nav{min-width:0;overflow-x:auto;white-space:nowrap;scrollbar-width:thin}.topbar nav button{flex:0 0 auto}
+ @media(max-width:1050px){.interactiveMapLayout{grid-template-columns:1fr}.mapFilters{grid-template-columns:repeat(2,minmax(0,1fr))}.mapRequestList{max-height:none}}
+ @media(max-width:700px){.mapFilters{grid-template-columns:1fr}.mapModeToggle{margin-left:0}.interactiveMapCanvas{min-height:280px}.mapFeatureList>button,.mapFeatureList>div{gap:7px;flex-wrap:wrap}.mapRequestRow{grid-template-columns:auto minmax(0,1fr)}.mapRequestRow>.statusPill{grid-column:2;justify-self:start}.medicalHistoryFooter{align-items:flex-start}.topbar nav{order:3;flex-basis:100%;width:100%}}
++
++
++/* LifeFlow shared portal shell: both donor and hospital use a horizontal header */
++html,body,#root{min-height:100%;margin:0}
++body{overflow-x:hidden}
++.app,.hospitalApp{min-height:100vh;min-height:100dvh;overflow:visible}
++.topbar,.hospitalTop{position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:14px;min-height:68px;height:auto;padding:8px clamp(14px,2.4vw,34px);background:rgba(255,255,255,.98);border-bottom:1px solid var(--line);box-shadow:0 2px 10px rgba(12,47,87,.035)}
++.topbar nav{position:static;display:flex;align-items:stretch;flex:1 1 auto;min-width:0;max-width:none;width:auto;height:auto;margin:0;padding:0;overflow-x:auto;overflow-y:hidden;white-space:nowrap;scrollbar-width:thin}
++.topbar nav button{position:relative;display:flex;align-items:center;justify-content:center;gap:7px;flex:0 0 auto;height:52px;padding:0 10px;border:0;border-bottom:3px solid transparent;border-radius:0;background:transparent;font-size:11px}
++.topbar nav button.active{border-bottom-color:var(--gold);background:transparent}
++.topActions{display:flex;align-items:center;gap:7px;flex:0 0 auto}
++.hospitalTop{flex-wrap:nowrap;justify-content:space-between}
++.hospitalTop>.brand{flex:0 0 auto}
++.hospitalTop .hospitalNav,.hospitalTop nav.hospitalNav,.hospitalTop .hospitalNavInHeader{position:static;inset:auto;z-index:auto;display:flex;flex:1 1 auto;align-items:center;justify-content:center;gap:3px;width:auto;height:auto;min-width:0;margin:0;padding:0;border:0;background:transparent;overflow-x:auto;overflow-y:hidden;white-space:nowrap;scrollbar-width:thin}
++.hospitalTop .hospitalNav button,.hospitalTop nav.hospitalNav button{position:relative;display:flex;align-items:center;justify-content:center;flex:0 0 auto;min-height:44px;height:auto;padding:9px 10px;border:1px solid transparent;border-radius:7px;background:transparent;color:var(--muted);font-size:11px;font-weight:700;white-space:nowrap}
++.hospitalTop .hospitalNav button.active,.hospitalTop nav.hospitalNav button.active{background:#eaf0f5;border-color:#dce5ed;color:var(--navy);box-shadow:inset 0 -2px var(--gold)}
++.hospitalTop .hospitalNav>a,.hospitalTop nav.hospitalNav>a{position:static;margin:0;padding:0;border:0;white-space:nowrap}
++.hospitalIdentity{display:flex;align-items:center;gap:7px;flex:0 0 auto;min-width:0}
++.hospitalIdentity .syncLabel{max-width:135px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
++.hospitalWorkspace{margin:0 auto;max-width:1440px;width:100%;padding:28px clamp(16px,3vw,42px) 56px;box-sizing:border-box}
++.hospitalLoginCard{max-height:none;overflow:visible;min-width:0}
++.hospitalAuth,.hospitalLogin{overflow:visible}
++/* Only the document scrolls vertically; data tables may scroll horizontally. */
++.hospitalNav{position:static;inset:auto;width:auto;bottom:auto;top:auto;overflow:visible}
++.hospitalWorkspace,.workspace{overflow:visible;min-height:0}
++.tableScroll{max-width:100%;overflow-x:auto;overflow-y:hidden}
++@media(max-width:1320px){
++ .hospitalTop{flex-wrap:wrap;gap:8px 14px}
++ .hospitalTop>.brand{order:0}
++ .hospitalIdentity{order:1;margin-left:auto}
++ .hospitalTop .hospitalNav,.hospitalTop nav.hospitalNav,.hospitalTop .hospitalNavInHeader{order:2;flex-basis:100%;justify-content:flex-start;width:100%}
++ .hospitalTop .hospitalNav button,.hospitalTop nav.hospitalNav button{min-height:40px}
++}
++@media(max-width:900px){
++ .topbar{flex-wrap:wrap;gap:6px 12px;padding:8px 14px}
++ .topbar>.brand{order:0}
++ .topActions{order:1;margin-left:auto}
++ .topbar nav{order:2;flex-basis:100%;width:100%;height:44px}
++ .topbar nav button{height:42px}
++ .hospitalTop{padding:10px 14px}
++ .hospitalTop>.brand{order:0}
++ .hospitalIdentity{order:1;flex-wrap:wrap;justify-content:flex-end}
++ .hospitalTop .hospitalNav,.hospitalTop nav.hospitalNav,.hospitalTop .hospitalNavInHeader{order:2;flex-basis:100%;width:100%;justify-content:flex-start}
++ .hospitalIdentity .syncLabel{max-width:120px}
++ .hospitalWorkspace{padding:22px 14px 40px}
++ .hospitalLogin{min-height:calc(100dvh - 68px)}
++}
++@media(max-width:620px){
++ .hospitalIdentity{width:100%;justify-content:flex-start}
++ .hospitalIdentity .syncLabel{max-width:unset;flex:1}
++ .hospitalTop .hospitalNav button,.hospitalTop nav.hospitalNav button{padding:8px 10px;font-size:10px}
++ .hospitalMetrics{grid-template-columns:repeat(2,minmax(0,1fr))}
++ .hospitalMetric:nth-child(2){border-right:0}
++ .hospitalMetric:nth-child(-n+2){border-bottom:1px solid var(--line)}
++ .hospitalLogin{display:flex;flex-direction:column}
++ .hospitalLogin>section{padding:30px 22px}
++ .hospitalLoginCard{width:calc(100% - 28px);box-sizing:border-box;margin:14px auto 24px;padding:22px}
++ .hospitalDemoGrid{grid-template-columns:1fr}
++}
+--- a/LifeFlow_Donor_Synced/frontend/index.html
++++ b/LifeFlow_Donor_Synced/frontend/index.html
+@@ -1 +1 @@
+-<!doctype html><html><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/><title>LifeFlow | Donor & Hospital Portal</title><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22%3E%3Crect width=%2264%22 height=%2264%22 rx=%2212%22 fill=%22%23102b46%22/%3E%3Cpath d=%22M32 10 C26 21 18 29 18 38 a14 14 0 0 0 28 0 C46 29 38 21 32 10Z%22 fill=%22none%22 stroke=%22white%22 stroke-width=%224%22/%3E%3C/svg%3E" />\n</head><body><div id="root"></div><script type="module" src="/src/main.jsx"></script></body></html>+<!doctype html><html><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/><title>LifeFlow | Donor & Hospital Portal</title><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22%3E%3Crect width=%2264%22 height=%2264%22 rx=%2212%22 fill=%22%23102b46%22/%3E%3Cpath d=%22M32 10 C26 21 18 29 18 38 a14 14 0 0 0 28 0 C46 29 38 21 32 10Z%22 fill=%22none%22 stroke=%22white%22 stroke-width=%224%22/%3E%3C/svg%3E" /></head><body><div id="root"></div><script type="module" src="/src/main.jsx"></script></body></html>
